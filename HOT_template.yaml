@@ -1,0 +1,80 @@
+heat_template_version: 2018-08-31
+
+description: >
+  Heat template to launch 2 VMs with minimum requirements (1 CPU) on each compute node.
+
+parameters:
+  image:
+    type: string
+    description: Image ID or name for the VMs
+    default: cirros-0.6.2-x86_64-disk  # CirrOS image is used
+  network:
+    type: string
+    description: Network ID or name where the VMs will be connected
+    default: compute-private-net  # Default to compute-private-net network
+  flavor:
+    type: string
+    description: Flavor ID or name for the VMs
+    default: cirros256  # Set default to cirros256 flavor
+
+resources:
+  vm1_compute1:
+    type: OS::Nova::Server
+    properties:
+      name: VM1_Compute1
+      image: { get_param: image }
+      flavor: { get_param: flavor }
+      networks:
+        - network: { get_param: network }
+          subnet: private-subnet-1
+      availability_zone: nova:compute-node1
+
+  vm2_compute1:
+    type: OS::Nova::Server
+    properties:
+      name: VM2_Compute1
+      image: { get_param: image }
+      flavor: { get_param: flavor }
+      networks:
+        - network: { get_param: network }
+          subnet: private-subnet-2
+      availability_zone: nova:compute-node1
+
+  vm3_compute2:
+    type: OS::Nova::Server
+    properties:
+      name: VM3_Compute2
+      image: { get_param: image }
+      flavor: { get_param: flavor }
+      networks:
+        - network: { get_param: network }
+          subnet: private-subnet-1
+      availability_zone: nova:compute-node2
+
+  vm4_compute2:
+    type: OS::Nova::Server
+    properties:
+      name: VM4_Compute2
+      image: { get_param: image }
+      flavor: { get_param: flavor }
+      networks:
+        - network: { get_param: network }
+          subnet: private-subnet-2
+      availability_zone: nova:compute-node2
+
+outputs:
+  vm1_compute1_ip:
+    description: IP address of VM1 on Compute Node 1
+    value: { get_attr: [vm1_compute1, first_address] }
+
+  vm2_compute1_ip:
+    description: IP address of VM2 on Compute Node 1
+    value: { get_attr: [vm2_compute1, first_address] }
+
+  vm3_compute2_ip:
+    description: IP address of VM3 on Compute Node 2
+    value: { get_attr: [vm3_compute2, first_address] }
+
+  vm4_compute2_ip:
+    description: IP address of VM4 on Compute Node 2
+    value: { get_attr: [vm4_compute2, first_address] }
