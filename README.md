@@ -26,3 +26,6 @@ Le nom des VMs et les ip de leurs sous-réseaux:
     VM3_Compute2 192.168.10.0/24
     VM4_Compute2 172.24.15.0
 
+Afin de valider leurs connexion, il s'agit de rentrer dans l'interface horizon 
+à l'adresse suivante http://192.168.122.252/dashboard/ et entrer dans la console de une
+des instance puis envoyer un ping vers l'instance qui est sur le meme sous-réseau.
