@@ -1,6 +1,6 @@
 # Implementing a Virtual Infrastructure with OpenStack
 
-### **Project Details**
+## **Project Details**
 
 This project involved the implementation of a virtual infrastructure using **OpenStack**, a powerful open-source cloud operating system. The objective was to create a realistic, multi-node cloud environment from scratch. This was achieved by setting up three core virtual machines (VMs) that serve as the foundation of the private cloud: a **control-node** and two **compute-nodes**.
 
@@ -27,7 +27,7 @@ To streamline the setup, the **DevStack** installer was used, which automates th
 
 ***
 
-### **Automated VM Deployment**
+## **Automated VM Deployment**
 
 The final phase of the project involved using OpenStack's automation capabilities to provision new VMs for end-users. This was accomplished with a **Heat orchestration template**, a YAML-formatted file that describes the desired infrastructure. The template defined the creation of four VMs, which were automatically deployed to the compute nodes. The VMs were isolated into two distinct private subnets, demonstrating OpenStack's network segmentation capabilities. 
 
@@ -40,6 +40,6 @@ The details of the deployed VMs and their corresponding subnets are:
 
 ***
 
-### **Validation and Conclusion**
+## **Validation and Conclusion**
 
 To validate the success of the deployment, a key step was to verify network connectivity. This was done by logging into the **Horizon dashboard** at `http://192.168.122.252/dashboard/`, accessing the console of one of the instances, and then sending a `ping` command to the other instance residing in the same private subnet. This confirmed that the VMs were correctly provisioned and could communicate with each other within their isolated network environments.
